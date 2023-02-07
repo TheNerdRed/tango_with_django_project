@@ -40,17 +40,11 @@ def populate():
     'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
     'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
 
- # If you want to add more categories or pages,
- # add them to the dictionaries above.
-
- # The code below goes through the cats dictionary, then adds each category,
- # and then adds all the associated pages for that category.
     for cat, cat_data in cats.items():
         c = add_cat(cat, views=cat_data['views'], likes=cat_data['likes'])
         for p in cat_data['pages']:
             add_page(c, p['title'], p['url'], p['views'])
 
- # Print out the categories we have added.
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
             print(f'- {c}: {p}')
@@ -69,7 +63,6 @@ def add_cat(name, views, likes):
     c.save()
     return c
 
- # Start execution here!
 if __name__ == '__main__':
     print('Starting Rango population script...')
     populate()
